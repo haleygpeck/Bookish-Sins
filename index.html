@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bookish Sins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#2a0f24;
+  --bg-2:#3a1630;
+  --card:#4a1d3d;
+  --card-2:#5a2549;
+  --ink:#fff1f4;
+  --pink:#ff8fb1;
+  --pink-2:#ffc2d6;
+  --berry:#c2185b;
+  --gold:#ffd48a;
+  --muted:#d9a7bf;
+  --shadow:#17061a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:'Fredoka',system-ui,sans-serif;font-size:16px;line-height:1.45;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 0%, #5b1f4a 0, transparent 45%),
+    radial-gradient(circle at 90% 30%, #4a1640 0, transparent 40%),
+    radial-gradient(rgba(255,143,177,.13) 1.5px, transparent 1.6px);
+  background-size:auto,auto,22px 22px;
+}
+.wrap{max-width:560px;margin:0 auto;padding:22px 16px 80px}
+
+/* header */
+header{text-align:center;margin-bottom:20px;position:relative}
+.mascot{width:96px;height:96px;display:block;margin:0 auto 2px;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+h1{
+  font-family:'Pacifico',cursive;font-weight:400;font-size:2.5rem;line-height:1.15;
+  margin:0;color:var(--pink);
+  text-shadow:0 3px 0 var(--shadow);
+}
+.tag{margin:6px 0 0;color:var(--muted);font-size:1rem}
+.spark{position:absolute;color:var(--gold);width:18px;height:18px}
+
+/* add card */
+.add{
+  background:var(--card);border:3px solid var(--pink);border-radius:26px;
+  padding:16px 16px 18px;margin-bottom:22px;
+  box-shadow:5px 6px 0 var(--shadow);
+}
+.add h2{font-size:1.25rem;font-weight:600;margin:0 0 4px;color:var(--pink-2);display:flex;align-items:center;gap:8px}
+.add h2 svg{width:20px;height:20px;color:var(--pink)}
+label{display:block;font-size:.88rem;color:var(--muted);margin:12px 0 5px 4px;font-weight:500}
+input[type=text],select{
+  width:100%;background:var(--bg);color:var(--ink);
+  border:2px solid #7a3563;border-radius:16px;padding:12px 14px;
+  font:inherit;font-size:16px;
+}
+input::placeholder{color:#a8789a}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spice{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+.spice button{background:none;border:0;padding:3px;cursor:pointer;line-height:0;color:#7a4568;transition:transform .12s}
+.spice button:active{transform:scale(1.25)}
+.spice button.on{color:#ff6b8f}
+.spice svg{width:30px;height:30px;display:block}
+.spice-label{font-size:.88rem;color:var(--gold);margin-left:8px;font-weight:500}
+.go{
+  width:100%;margin-top:18px;padding:14px;border:0;border-radius:999px;
+  background:var(--pink);color:#3a0b2c;font:inherit;font-weight:700;font-size:1.08rem;
+  cursor:pointer;box-shadow:0 5px 0 #c4577f;
+}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 #c4577f}
+
+/* tabs */
+.tabs{display:flex;gap:6px;margin-bottom:16px;padding:2px 2px 8px}
+.tabs button{
+  flex:1 1 0;min-width:0;white-space:nowrap;background:var(--card);color:var(--pink-2);
+  border:2px solid #7a3563;border-radius:999px;padding:8px 4px;
+  font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
+}
+.tabs button[aria-pressed=true]{background:var(--pink);color:#3a0b2c;border-color:var(--pink);box-shadow:0 3px 0 #c4577f}
+.tabs .n{margin-left:4px;background:rgba(0,0,0,.2);border-radius:999px;padding:0 8px;font-size:.82rem}
+
+/* cards */
+.list{display:flex;flex-direction:column;gap:16px}
+.book{
+  position:relative;display:flex;gap:12px;align-items:flex-start;
+  background:var(--card);border:3px solid #7a3563;border-radius:24px;
+  padding:14px 14px 14px 12px;box-shadow:4px 5px 0 var(--shadow);
+}
+.book:nth-child(odd){transform:rotate(-.6deg)}
+.book:nth-child(even){transform:rotate(.6deg)}
+.book.pop{animation:pop .45s ease-out}
+@keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.cover{
+  flex:0 0 58px;height:78px;border-radius:10px 14px 14px 10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Pacifico',cursive;font-size:1.9rem;color:rgba(255,255,255,.92);
+  border-left:7px solid rgba(0,0,0,.25);box-shadow:2px 3px 0 var(--shadow);
+}
+.body{flex:1;min-width:0}
+.book h3{font-size:1.2rem;font-weight:600;line-height:1.2;margin:0;overflow-wrap:anywhere;padding-right:26px}
+.by{color:var(--muted);font-size:.9rem;margin:2px 0 0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.flames{display:inline-flex;color:#ff6b8f}
+.flames svg{width:17px;height:17px}
+.chip{font-size:.78rem;background:var(--card-2);color:var(--pink-2);border-radius:999px;padding:2px 10px;font-weight:500}
+.acts{display:flex;gap:8px;margin-top:12px;align-items:center}
+.acts .primary{
+  background:var(--pink-2);color:#3a0b2c;border:0;border-radius:999px;
+  padding:7px 14px;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;box-shadow:0 3px 0 #c98aa7;
+}
+.acts .primary:active{transform:translateY(3px);box-shadow:none}
+.acts .del{margin-left:auto;background:none;border:0;color:var(--muted);font:inherit;font-size:.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.ribbon{position:absolute;top:-3px;right:16px;width:20px;height:34px;background:var(--berry);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.book.read .ribbon{background:var(--gold)}
+.book.read .cover{filter:saturate(.8)}
+
+.empty{text-align:center;color:var(--muted);padding:26px 18px;border:3px dashed #7a3563;border-radius:24px}
+.empty svg{width:64px;height:64px;display:block;margin:0 auto 6px}
+.empty b{display:block;font-family:'Pacifico',cursive;font-weight:400;font-size:1.3rem;color:var(--pink);margin-bottom:2px}
+.note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:26px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flame" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2c.5 3.2-1.2 4.9-2.7 6.7C7.7 10.6 6 12.6 6 15.5A6 6 0 0 0 18 15.5c0-2.2-1-3.9-2.2-5.2-.2 1.3-.9 2.2-1.8 2.7.6-3.9-.4-7.9-2-11z"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-8-5.1-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.900-8 11-8 11z"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2.600 7.400L22 11l-7.400 2.600L12 21l-2.600-7.400L2 11l7.400-2.600z"/></symbol>
+  <symbol id="mascot" viewBox="0 0 100 100">
+    <rect x="27" y="78" width="56" height="9" rx="4.5" fill="#ffe9ef"/>
+    <path d="M66 84h9v13l-4.500-3.500L66 97z" fill="#ffd48a"/>
+    <rect x="18" y="12" width="64" height="72" rx="10" fill="#e0457a"/>
+    <path d="M28 12h2v72h-2A10 10 0 0 1 18 74V22a10 10 0 0 1 10-10z" fill="#b0124f"/>
+    <rect x="30" y="12" width="3" height="72" fill="#c2185b"/>
+    <path d="M57 20c-1.800-3.500-7-2.800-7 1.200 0 3 3.500 5 7 8 3.500-3 7-5 7-8 0-4-5.200-4.700-7-1.200z" transform="translate(-5 -1)" fill="#ffc2d6"/>
+    <circle cx="47" cy="52" r="4.500" fill="#2a0f24"/><circle cx="69" cy="52" r="4.500" fill="#2a0f24"/>
+    <circle cx="48.500" cy="50.500" r="1.500" fill="#fff"/><circle cx="70.500" cy="50.500" r="1.500" fill="#fff"/>
+    <ellipse cx="40" cy="61" rx="5" ry="3" fill="#ffb3c9" opacity=".8"/><ellipse cx="76" cy="61" rx="5" ry="3" fill="#ffb3c9" opacity=".8"/>
+    <path d="M53 60c3 4 9 4 12 0" stroke="#2a0f24" stroke-width="2.500" stroke-linecap="round" fill="none"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <svg class="spark" style="left:12%;top:8px"><use href="#star"/></svg>
+    <svg class="spark" style="right:14%;top:34px;width:13px;height:13px"><use href="#star"/></svg>
+    <svg class="mascot" viewBox="0 0 100 100" role="img" aria-label="A cute little book with a face"><use href="#mascot"/></svg>
+    <h1>Bookish Sins</h1>
+    <p class="tag">Saw it in a reel? Keep it here.</p>
+  </header>
+
+  <section class="add" aria-label="Add a book">
+    <h2><svg><use href="#heart"/></svg>Add a book</h2>
+    <label for="title">Title</label>
+    <input type="text" id="title" placeholder="Haunting Adeline" autocomplete="off">
+    <label for="author">Author</label>
+    <input type="text" id="author" placeholder="H. D. Carlton" autocomplete="off">
+    <div class="row">
+      <div>
+        <label for="source">Where I saw it</label>
+        <select id="source">
+          <option>Instagram reel</option>
+          <option>TikTok</option>
+          <option>A friend</option>
+          <option>Bookstore</option>
+          <option>Somewhere else</option>
+        </select>
+      </div>
+      <div>
+        <label for="tropes">Trope (optional)</label>
+        <input type="text" id="tropes" placeholder="Enemies to lovers" autocomplete="off">
+      </div>
+    </div>
+    <label>Spice level</label>
+    <div class="spice" id="spice" role="group" aria-label="Spice level"></div>
+    <button class="go" id="save">Add to my list</button>
+  </section>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="list" id="list"></div>
+  <p class="note" id="note"></p>
+</div>
+
+<script>
+(function(){
+  var books = [];
+  var filter = 'want';
+  var spiceVal = 0;
+  var store = null;
+  var justAdded = null;
+
+  var COVERS = ['#c2185b','#7b2d8e','#d1495b','#5b4bb7','#e0457a','#b5338a','#a23b72'];
+  function coverColor(t){
+    var h = 0; for (var i=0;i<t.length;i++) h = (h*31 + t.charCodeAt(i)) >>> 0;
+    return COVERS[h % COVERS.length];
+  }
+  function icon(id, cls){
+    var s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    if (cls) s.setAttribute('class', cls);
+    var u = document.createElementNS('http://www.w3.org/2000/svg','use');
+    u.setAttribute('href','#'+id); s.appendChild(u); return s;
+  }
+
+  /* ---------- storage ---------- */
+  function localStore(){
+    var KEY='dark-tbr-books';
+    function persist(){ try{ localStorage.setItem(KEY, JSON.stringify(books)); }catch(e){} }
+    return {
+      kind:'local',
+      load:function(cb){
+        try{ var raw=localStorage.getItem(KEY); if(raw) books = JSON.parse(raw)||[]; }catch(e){}
+        cb();
+      },
+      put:function(b){
+        var i = books.findIndex(function(x){return x.id===b.id});
+        if(i>=0) books[i]=b; else books.unshift(b);
+        persist(); render();
+      },
+      remove:function(id){ books = books.filter(function(x){return x.id!==id}); persist(); render(); }
+    };
+  }
+  function dbStore(db, uid){
+    var col = db.collection('data/users/'+uid);
+    return {
+      kind:'db',
+      load:function(cb){
+        var done=false;
+        var t=setTimeout(function(){ if(!done){done=true;cb();} },10000);
+        col.onSnapshot(function(snap){
+          books = snap.docs.map(function(d){return d.data();}).filter(Boolean);
+          books.sort(function(a,b){return (b.added||0)-(a.added||0)});
+          if(!done){done=true;clearTimeout(t);cb();} else render();
+        }, function(){ if(!done){done=true;clearTimeout(t);cb();} });
+      },
+      put:function(b){ col.doc(b.id).set(b).catch(function(){}); },
+      remove:function(id){ col.doc(id).delete().catch(function(){}); }
+    };
+  }
+
+  /* ---------- spice picker ---------- */
+  var spiceBox = document.getElementById('spice');
+  var spiceLabel = document.createElement('span'); spiceLabel.className='spice-label';
+  var SPICE_WORDS = ['Not sure yet','Sweet','Warm','Spicy','Very spicy','Scorching'];
+  function drawSpice(){
+    spiceBox.innerHTML='';
+    for (var i=1;i<=5;i++){
+      (function(n){
+        var b=document.createElement('button');
+        b.type='button'; b.setAttribute('aria-label', n+' flame'+(n>1?'s':''));
+        if(n<=spiceVal) b.className='on';
+        b.appendChild(icon('flame'));
+        b.onclick=function(){ spiceVal = (spiceVal===n)?0:n; drawSpice(); };
+        spiceBox.appendChild(b);
+      })(i);
+    }
+    spiceLabel.textContent = SPICE_WORDS[spiceVal];
+    spiceBox.appendChild(spiceLabel);
+  }
+
+  /* ---------- rendering ---------- */
+  var FILTERS = [['want','To read'],['reading','Reading'],['read','Finished']];
+  function countFor(k){ return books.filter(function(b){return (b.status||'want')===k}).length; }
+
+  function renderTabs(){
+    var box=document.getElementById('tabs'); box.innerHTML='';
+    FILTERS.forEach(function(f){
+      var b=document.createElement('button');
+      b.setAttribute('aria-pressed', filter===f[0]);
+      b.appendChild(document.createTextNode(f[1]));
+      var n=document.createElement('span'); n.className='n'; n.textContent=countFor(f[0]);
+      b.appendChild(n);
+      b.onclick=function(){ filter=f[0]; render(); };
+      box.appendChild(b);
+    });
+  }
+
+  function emptyMsg(){
+    var d=document.createElement('div'); d.className='empty';
+    d.appendChild(icon('mascot'));
+    d.firstChild.setAttribute('viewBox','0 0 100 100');
+    var t=document.createElement('b'), p=document.createElement('span');
+    if(filter==='want'){ t.textContent='Your list is empty'; p.textContent='Add the next book you spot in a reel.'; }
+    else if(filter==='reading'){ t.textContent='Nothing in progress'; p.textContent='Tap “Start reading” on a book from your list.'; }
+    else { t.textContent='No finished books yet'; p.textContent='Your finished reads will collect here.'; }
+    d.appendChild(t); d.appendChild(p); return d;
+  }
+
+  function card(b){
+    var el=document.createElement('article');
+    el.className='book'+((b.status==='read')?' read':'')+(b.id===justAdded?' pop':'');
+
+    var rb=document.createElement('div'); rb.className='ribbon'; el.appendChild(rb);
+
+    var cv=document.createElement('div'); cv.className='cover';
+    cv.style.background=coverColor(b.title||'');
+    cv.textContent=(b.title||'?').trim().charAt(0).toUpperCase();
+    el.appendChild(cv);
+
+    var body=document.createElement('div'); body.className='body';
+    var h=document.createElement('h3'); h.textContent=b.title; body.appendChild(h);
+    if(b.author){ var by=document.createElement('p'); by.className='by'; by.textContent='by '+b.author; body.appendChild(by); }
+
+    var meta=document.createElement('div'); meta.className='meta';
+    if(b.spice>0){
+      var fl=document.createElement('span'); fl.className='flames';
+      fl.setAttribute('aria-label','Spice level '+b.spice+' of 5');
+      for(var i=0;i<b.spice;i++) fl.appendChild(icon('flame'));
+      meta.appendChild(fl);
+    }
+    if(b.tropes){ var c=document.createElement('span'); c.className='chip'; c.textContent=b.tropes; meta.appendChild(c); }
+    if(b.source){ var c2=document.createElement('span'); c2.className='chip'; c2.textContent=b.source; meta.appendChild(c2); }
+    body.appendChild(meta);
+
+    var acts=document.createElement('div'); acts.className='acts';
+    var st=b.status||'want';
+    var next=document.createElement('button'); next.className='primary';
+    if(st==='want'){ next.textContent='Start reading'; next.onclick=function(){ setStatus(b,'reading'); }; }
+    else if(st==='reading'){ next.textContent='Mark finished'; next.onclick=function(){ setStatus(b,'read'); }; }
+    else { next.textContent='Read again'; next.onclick=function(){ setStatus(b,'want'); }; }
+    acts.appendChild(next);
+    var del=document.createElement('button'); del.className='del'; del.textContent='Remove';
+    del.onclick=function(){ if(confirm('Remove “'+b.title+'” from your list?')) store.remove(b.id); };
+    acts.appendChild(del);
+    body.appendChild(acts);
+
+    el.appendChild(body); return el;
+  }
+
+  function setStatus(b, s){
+    var nb={}; for(var k in b) nb[k]=b[k]; nb.status=s;
+    store.put(nb);
+    if(store.kind==='db'){ b.status=s; render(); }
+  }
+
+  function render(){
+    renderTabs();
+    var list=document.getElementById('list'); list.innerHTML='';
+    var shown=books.filter(function(b){return (b.status||'want')===filter});
+    if(!shown.length) list.appendChild(emptyMsg());
+    shown.forEach(function(b){ list.appendChild(card(b)); });
+    justAdded=null;
+    var note=document.getElementById('note');
+    note.textContent = store && store.kind==='local' ? 'Saved on this device only.' : '';
+  }
+
+  /* ---------- add ---------- */
+  function newId(){ return 'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+  document.getElementById('save').onclick=function(){
+    var t=document.getElementById('title'), a=document.getElementById('author');
+    var title=t.value.trim();
+    if(!title){ t.focus(); t.placeholder='Add a title first'; return; }
+    var b={
+      id:newId(), title:title, author:a.value.trim(),
+      source:document.getElementById('source').value,
+      tropes:document.getElementById('tropes').value.trim(),
+      spice:spiceVal, status:'want', added:Date.now()
+    };
+    store.put(b);
+    if(store.kind==='db'){ books.unshift(b); }
+    t.value=''; a.value=''; document.getElementById('tropes').value='';
+    spiceVal=0; drawSpice(); filter='want'; justAdded=b.id; render(); t.focus();
+  };
+  document.getElementById('title').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('author').focus();
+  });
+  document.getElementById('author').addEventListener('keydown',function(e){
+    if(e.key==='Enter') document.getElementById('save').click();
+  });
+
+  /* ---------- start ---------- */
+  drawSpice();
+  store = localStore();
+  store.load(render);
+
+  (async function(){
+    try{
+      if(!window.claude || !claude.use) return;
+      var db = await claude.use('db');
+      var user = await claude.use('user');
+      if(!db || !user) return;
+      var uid = await user.id();
+      if(!uid) return;
+      var s = dbStore(db, uid);
+      var localBooks = books.slice();
+      store = s;
+      s.load(function(){
+        localBooks.forEach(function(lb){
+          if(!books.some(function(x){return x.id===lb.id})) s.put(lb);
+        });
+        render();
+      });
+    }catch(e){}
+  })();
+})();
+</script>
+</body>
+</html>
